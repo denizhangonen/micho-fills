@@ -28,7 +28,24 @@ function createFieldRow(field = { tags: '', value: '' }) {
 
 function loadFields() {
   chrome.storage.sync.get('rules', (data) => {
-    const rules = data.rules || [];
+    let rules = data.rules;
+
+    // Set default fields if no rules exist
+    if (!rules || rules.length === 0) {
+      rules = [
+        { tags: 'first name, firstname, first_name', value: '' },
+        { tags: 'last name, lastname, last_name', value: '' },
+        { tags: 'full name, fullname, full_name, name', value: '' },
+        { tags: 'email, email address, email_address', value: '' },
+        { tags: 'phone, phone number, mobile, phone_number', value: '' },
+        { tags: 'city, location, town', value: '' },
+        { tags: 'country, nation, country_name', value: '' },
+        { tags: 'linkedin, linkedin profile, linkedin url', value: '' },
+        { tags: 'github, github profile, github url', value: '' },
+        { tags: 'cover letter, motivation, message, coverletter', value: '' },
+      ];
+    }
+
     rules.forEach((field) => createFieldRow(field));
   });
 }
@@ -54,3 +71,4 @@ addFieldBtn.addEventListener('click', () => createFieldRow());
 saveBtn.addEventListener('click', saveFields);
 
 loadFields();
+
