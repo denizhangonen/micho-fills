@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "MichoFill",
+  "version": "1.0",
+  "description": "Auto-fill job forms with your custom data. Fast, simple, and purrfectly efficient.",
+  "permissions": ["storage"],
+  "host_permissions": ["<all_urls>"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}
+
